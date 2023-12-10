@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/342/342344.png">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #2d3e50, #3498db);
+            color: #ecf0f1;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .calculator {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: rgb(255, 255, 255);
+            border: 2px solid #2980b9;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .calculator:hover {
+            transform: scale(1.05);
+        }
+        
+        button {
+            padding: 15px 25px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2ecc71;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:hover {
+            background-color: #27ae60;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        #result {
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 24px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>Калькулятор</h1>
+        <input type="number" id="number1" placeholder="Enter number 1">
+        <input type="number" id="number2" placeholder="Enter number 2">
+        <button onclick="calculate('add')">+</button>
+        <button onclick="calculate('subtract')">-</button>
+        <button onclick="calculate('multiply')">*</button>
+        <button onclick="calculate('divide')">/</button>
+        <p id="result">Результат</p>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            var number1 = parseFloat(document.getElementById('number1').value);
+            var number2 = parseFloat(document.getElementById('number2').value);
+            var resultElement = document.getElementById('result');
+
+            if (isNaN(number1) || isNaN(number2)) {
+                resultElement.innerHTML = "Будь ласка, введіть коректні числа";
+                return;
+            }
+
+            switch (operation) {
+                case "add":
+                    resultElement.innerHTML = "Результат: " + (number1 + number2);
+                    break;
+                case "subtract":
+                    resultElement.innerHTML = "Результат: " + (number1 - number2);
+                    break;
+                case "multiply":
+                    resultElement.innerHTML = "Результат: " + (number1 * number2);
+                    break;
+                case "divide":
+                    if (number2 === 0) {
+                        resultElement.innerHTML = "Неможливо ділити на нуль";
+                    } else {
+                        resultElement.innerHTML = "Результат: " + (number1 / number2);
+                    }
+                    break;
+                default:
+                    resultElement.innerHTML = "Невірна операція";
+            }
+        }
+    </script>
+</body>
+
+</html>
